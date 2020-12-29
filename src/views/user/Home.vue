@@ -104,7 +104,10 @@
           <ul class="menu-extra">
             <li class="search search__open"><span class="ti-search"></span></li>
             <li class="user__menu"><span class="ti-user"></span></li>
-            <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
+            <li class="cart__menu">
+                <router-link to="/cart"> <span class="ti-shopping-cart"></span></router-link>
+                
+                </li>
           </ul>
         </div>
         <!-- End Tools  -->
