@@ -7,7 +7,16 @@
     <router-view/>
   </div>
 </template>
-
+<script>
+export default {
+  created() {
+    const vm = this;
+    if (localStorage.getItem("token")) {
+      vm.$store.dispatch("setUserToken");
+    }
+  },
+};
+</script>
 <style>
 /* #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
