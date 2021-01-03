@@ -55,6 +55,14 @@
                 訂單列表
               </router-link>
             </li>
+            <li class="nav-item">
+              <router-link to="/admin/brands" class="nav-link  d-flex">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512.013 512.013" height="24" width="24" style="enable-background:new 0 0 512.013 512.013; " xml:space="preserve">
+                  <path d="M287.757,225.794l-31.808,8.352l-88.256,23.104c-31.168,7.712-58.432,17.984-84.704,8.992    c-35.712-15.424-35.072-55.552-8.448-98.24C27.469,206.85-57.235,331.074,57.325,343.618c14.592,1.92,40.576-3.2,68.8-15.072    l129.824-53.28l256.064-104.704L287.757,225.794z"/>
+                </svg>
+                品牌列表
+              </router-link>
+            </li>
           </ul>
 
         </div>
