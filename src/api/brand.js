@@ -22,6 +22,8 @@ export function newBrand(data) {
     data: {
       name: data.name,
       description: data.description,
+      type: data.type,
+      status: data.status,
     }
   });
 }
@@ -47,6 +49,8 @@ export function updateBrand(data) {
     data: {
       name: data.name,
       description: data.description,
+      type: data.type,
+      status: data.status,
     }
   });
 }

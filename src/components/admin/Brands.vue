@@ -12,6 +12,7 @@
     <table class="table mt-4">
       <thead>
         <tr>
+          <th class="text-nowrap">品牌分類</th>
           <th class="text-nowrap">品牌名稱</th>
           <th class="text-nowrap">品牌圖片</th>
           <th class="text-nowrap">品牌說明</th>
@@ -25,7 +26,17 @@
           :key="key"
           :class="{ 'text-secondary': !item.status === 'true' }"
         >
-          <td>{{ item.name }}</td>
+         <td>
+            <ul>
+              <li>{{ item.type }}</li>
+            </ul>
+          </td>
+          <td>
+            <ul>
+              <li>{{ item.name }}</li>
+              <li v-if="item.status==0" class="text-danger">(未啟用)</li>
+            </ul>
+          </td>
        
           <td style="width:260px;"><img  :src="item.pic" v-if="item.pic" :alt="`品牌圖片${item.name}`" ></td>
       
@@ -122,12 +133,44 @@
                 <div class="form-group">
                   <label for="description">品牌描述</label>
                   <textarea
+                    rows="20"
                     type="text"
                     class="form-control"
                     id="description"
                     v-model="focusBrand.description"
                     placeholder="請輸入品牌描述"
                   ></textarea>
+                </div>
+
+                 <div class="form-group">
+                  <div class="form-check">
+                    <!-- 由1和0控制狀態, 當1時為true-value, 0則相反 -->
+                    <input
+                      id="statuscheckbox"
+                      class="form-check-input"
+                      type="checkbox"
+                      v-model="focusBrand.status"
+                      :true-value="1"
+                      :false-value="0"
+                    />
+                    <label for="statuscheckbox" class="form-check-label">是否啟用</label>
+                  </div>
+                </div>
+<hr>
+                   <div class="form-group">
+                  <div class="form-check">
+                    <input v-model="focusBrand.type" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="運動品牌" checked>
+                    <label class="form-check-label" for="exampleRadios1">
+                      運動品牌
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input v-model="focusBrand.type" class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="網拍">
+                    <label class="form-check-label" for="exampleRadios2">
+                      網拍
+                    </label>
+                  </div>
+           
                 </div>
              
               </div>
