@@ -16,20 +16,19 @@
           <ul class="main__menu">
             <!-- BRAND 運動品牌 -->
             <li class="current drop">
-              <a href="index.html">BRAND 運動品牌</a>
+              <a href="javascript:;">BRAND 運動品牌</a>
               <ul class="dropdown">
                 <li v-for="(item, key) in Brands_1" :key="key">
-                  
                   <a :href="`/#/?brand=${item.name}`">{{ item.name }}</a>
                 </li>
               </ul>
             </li>
             <!-- BRAND 網拍 -->
             <li class="current drop">
-              <a href="index.html">BRAND 網拍</a>
+              <a href="javascript:;">BRAND 網拍</a>
               <ul class="dropdown">
                 <li v-for="(item, key) in Brands_2" :key="key">
-                  <a href="index.html">{{ item.name }}</a>
+                <a :href="`/#/?brand=${item.name}`">{{ item.name }}</a>
                 </li>
               </ul>
             </li>
