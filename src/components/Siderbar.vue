@@ -1,0 +1,179 @@
+<template>
+  <div class="sidebar--content">
+    <div class="sidebar--top">
+      <!-- Start Site Logo  -->
+      <div class="sidebar--logo">
+        <a href="/">
+          <img src="images/logo/uniqlo-large.png" alt="logo" />
+        </a>
+      </div>
+      <!-- End Site Logo  -->
+      <!-- Start Sidebar Navigation  -->
+      <!-- Start Sidebar Navigation  -->
+      <div class="sidebar--nav">
+        <Loading :active.sync="isLoading"></Loading>
+        <nav class="mainmenu__nav onepage--menu menu__style--7">
+          <ul class="main__menu">
+            <!-- BRAND 運動品牌 -->
+            <li class="current drop">
+              <a href="index.html">BRAND 運動品牌</a>
+              <ul class="dropdown">
+                <li v-for="(item, key) in Brands_1" :key="key">
+                  
+                  <a :href="`/#/?brand=${item.name}`">{{ item.name }}</a>
+                </li>
+              </ul>
+            </li>
+            <!-- BRAND 網拍 -->
+            <li class="current drop">
+              <a href="index.html">BRAND 網拍</a>
+              <ul class="dropdown">
+                <li v-for="(item, key) in Brands_2" :key="key">
+                  <a href="index.html">{{ item.name }}</a>
+                </li>
+              </ul>
+            </li>
+            <li><a href="about.html">about us</a></li>
+            <li><a href="shop.html">shop</a></li>
+            <li class="drop">
+              <a href="#pages">Pages</a>
+              <ul class="dropdown">
+                <li><a href="shop.html">shop</a></li>
+                <li><a href="shop-sidebar.html">shop sidebar</a></li>
+                <li><a href="product-details.html">product details</a></li>
+                <li><a href="cart.html">cart</a></li>
+                <li><a href="checkout.html">checkout</a></li>
+                <li><a href="wishlist.html">wishlist</a></li>
+                <li><a href="team.html">team</a></li>
+                <li><a href="blog.html">blog</a></li>
+                <li><a href="blog-details.html">blog details</a></li>
+              </ul>
+            </li>
+            <li><a href="blog.html">Blog</a></li>
+            <li><a href="contact.html">Contact us</a></li>
+          </ul>
+        </nav>
+      </div>
+      <!-- End Sidebar Navigation  -->
+      <!-- End Sidebar Navigation  -->
+      <!-- Start Tools  -->
+      <div class="sidebar--tools">
+        <ul class="menu-extra">
+          <li class="search search__open"><span class="ti-search"></span></li>
+          <li class="user__menu"><span class="ti-user"></span></li>
+          <li class="cart__menu">
+            <router-link to="/cart">
+              <span class="ti-shopping-cart"></span
+            ></router-link>
+          </li>
+        </ul>
+        <ul>
+          <li>
+            <div v-if="user !== null">
+              <span class="text-success">歡迎回來! {{ user.name }}</span>
+              <router-link
+                v-if="user.roles === 'admin'"
+                class="p-2 text-dark"
+                to="/admin/products"
+              >
+                管理台
+              </router-link>
+              <a href="#" class="p-2 text-danger" @click.prevent="logout"
+                >登出</a
+              >
+            </div>
+            <div v-else>
+              <router-link class="p-2 text-dark" to="/login">
+                Login </router-link
+              >/
+              <router-link class="p-2 text-dark" to="/register">
+                Register
+              </router-link>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <!-- End Tools  -->
+    </div>
+    <!-- Start Sidebar Footer -->
+    <div class="sidebar--footer">
+      <!-- Start Social Network -->
+      <div class="sidebar--social__network">
+        <div class="sidebar__ft__widget">
+          <h2 class="ft__title">Follow Us</h2>
+          <ul class="social__icon">
+            <li>
+              <a href="https://twitter.com/devitemsllc" target="_blank"
+                ><i class="zmdi zmdi-twitter"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://www.instagram.com/devitems/" target="_blank"
+                ><i class="zmdi zmdi-instagram"></i
+              ></a>
+            </li>
+            <li>
+              <a
+                href="https://www.facebook.com/devitems/?ref=bookmarks"
+                target="_blank"
+                ><i class="zmdi zmdi-facebook"></i
+              ></a>
+            </li>
+            <li>
+              <a href="https://plus.google.com/" target="_blank"
+                ><i class="zmdi zmdi-google-plus"></i
+              ></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- End Social Network -->
+    </div>
+    <!-- End Sidebar Footer -->
+  </div>
+</template>
+
+<script>
+import { getBrandbyType } from "@/api/brand";
+
+export default {
+  data() {
+    return {
+      isLoading: false,
+      Brands_1: [],
+      Brands_2: [],
+    };
+  },
+  computed: {
+    user() {
+      return this.$store.getters.user;
+    },
+  },
+  methods: {
+    logout() {
+      localStorage.clear();
+      location.reload();
+    },
+    getBrand() {
+      const vm = this;
+      vm.isLoading = true;
+      getBrandbyType("運動品牌").then((response) => {
+        console.log(response.data);
+        vm.Brands_1 = vm.Brands_1.concat(response.data);
+        vm.isLoading = false;
+      });
+      getBrandbyType("網拍").then((response) => {
+        console.log(response.data);
+        vm.Brands_2 = vm.Brands_2.concat(response.data);
+        vm.isLoading = false;
+      });
+    },
+  },
+  created() {
+    this.getBrand();
+  },
+};
+</script>
+
+<style>
+</style>

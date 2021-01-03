@@ -10,6 +10,13 @@ export function getProduct_pages(page = 1) {
   });
 }
 
+// 取得商品資料 (不需要權限)
+export function getProductbyBrand_pages(brand,page = 1) {
+  return request({
+    url: `/brands/product/${brand}?page=${page}`,
+    method: "get",
+  });
+}
 //＝＝＝管理員＝＝＝
 
 

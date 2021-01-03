@@ -11,6 +11,13 @@ export function getBrand() {
   });
 }
 
+// 取得品牌
+export function getBrandbyType(type) {
+  return request({
+    url: `/brands?type=${type}`,
+    method: "get"
+  });
+}
 
 //＝＝＝管理員＝＝＝
 
