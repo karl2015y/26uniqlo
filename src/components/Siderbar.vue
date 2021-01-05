@@ -14,42 +14,30 @@
         <Loading :active.sync="isLoading"></Loading>
         <nav class="mainmenu__nav onepage--menu menu__style--7">
           <ul class="main__menu">
+            <li><a href="/#/">HOME 首頁</a></li>
+
             <!-- BRAND 運動品牌 -->
-            <li class="current drop">
+            <li class="drop" :class="{'current':Brands_1.find(function(item){return item.name == $route.query.brand;})!=undefined}">
               <a href="javascript:;">BRAND 運動品牌</a>
               <ul class="dropdown">
                 <li v-for="(item, key) in Brands_1" :key="key">
-                  <a :href="`/#/?brand=${item.name}`">{{ item.name }}</a>
+                  <a :href="`/#/shop/?brand=${item.name}`">{{ item.name }}</a>
                 </li>
               </ul>
             </li>
             <!-- BRAND 網拍 -->
-            <li class="current drop">
+            <li class="drop" :class="{'current':Brands_2.find(function(item){return item.name == $route.query.brand;})!=undefined}">
               <a href="javascript:;">BRAND 網拍</a>
               <ul class="dropdown">
                 <li v-for="(item, key) in Brands_2" :key="key">
-                <a :href="`/#/?brand=${item.name}`">{{ item.name }}</a>
+                <a :href="`/#/shop/?brand=${item.name}`">{{ item.name }}</a>
                 </li>
               </ul>
             </li>
-            <li><a href="about.html">about us</a></li>
-            <li><a href="shop.html">shop</a></li>
-            <li class="drop">
-              <a href="#pages">Pages</a>
-              <ul class="dropdown">
-                <li><a href="shop.html">shop</a></li>
-                <li><a href="shop-sidebar.html">shop sidebar</a></li>
-                <li><a href="product-details.html">product details</a></li>
-                <li><a href="cart.html">cart</a></li>
-                <li><a href="checkout.html">checkout</a></li>
-                <li><a href="wishlist.html">wishlist</a></li>
-                <li><a href="team.html">team</a></li>
-                <li><a href="blog.html">blog</a></li>
-                <li><a href="blog-details.html">blog details</a></li>
-              </ul>
-            </li>
+            <li><a href="about.html">客制化代購服務（計價方式）</a></li>
+            <li><a href="shop.html">會員專區（VIP説明）</a></li>
             <li><a href="blog.html">Blog</a></li>
-            <li><a href="contact.html">Contact us</a></li>
+            <li :class="{'current':$route.name=='Myorder'}"><a href="/#/myorder">歷史訂單</a></li>
           </ul>
         </nav>
       </div>
@@ -57,7 +45,7 @@
       <!-- End Sidebar Navigation  -->
       <!-- Start Tools  -->
       <div class="sidebar--tools">
-        <ul class="menu-extra">
+        <!-- <ul class="menu-extra">
           <li class="search search__open"><span class="ti-search"></span></li>
           <li class="user__menu"><span class="ti-user"></span></li>
           <li class="cart__menu">
@@ -65,7 +53,7 @@
               <span class="ti-shopping-cart"></span
             ></router-link>
           </li>
-        </ul>
+        </ul> -->
         <ul>
           <li>
             <div v-if="user !== null">
@@ -83,10 +71,10 @@
             </div>
             <div v-else>
               <router-link class="p-2 text-dark" to="/login">
-                Login </router-link
+                登入 </router-link
               >/
               <router-link class="p-2 text-dark" to="/register">
-                Register
+                註冊
               </router-link>
             </div>
           </li>

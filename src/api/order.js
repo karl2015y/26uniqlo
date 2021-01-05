@@ -4,6 +4,15 @@ import request from "@/utils/request";
 
 
 // 新增訂單
+export function getMyOrders() {
+  return request({
+    url: `/user/order`,
+    method: "get",
+  });
+}
+
+
+// 新增訂單
 export function createOrders(data) {
   return request({
     url: `/user/order`,
