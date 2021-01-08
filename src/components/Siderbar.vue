@@ -34,7 +34,7 @@
                 </li>
               </ul>
             </li>
-            <li><a href="about.html">客制化代購服務（計價方式）</a></li>
+            <li><router-link to="/daigou">客制化代購服務（計價方式）</router-link></li>
             <li><a href="shop.html">會員專區（VIP説明）</a></li>
             <li><a href="blog.html">Blog</a></li>
             <li :class="{'current':$route.name=='Myorder'}"><a href="/#/myorder">歷史訂單</a></li>

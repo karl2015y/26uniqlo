@@ -2,9 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/user/Home.vue'
 import Dashboard from '../views/admin/Dashboard.vue';
-// import Orders from '../components/admin/Orders';
-// import Products from '../components/admin/Products';
-// import Brands from '../components/admin/Brands';
+
 
 Vue.use(VueRouter)
 
@@ -41,6 +39,16 @@ const routes = [
     path: '/myorder',
     name: 'Myorder',
     component: () => import(/* webpackChunkName: "about" */ '../views/user/Myorder.vue'),
+  },
+  {
+    path: '/daigou',
+    name: 'Daigou',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Daigou.vue'),
+  },
+  {
+    path: '/daigou/:dgid',
+    name: 'DaigouItems',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Daigou.vue'),
   },
   {
     path: '/admin',
