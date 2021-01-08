@@ -44,7 +44,7 @@ service.interceptors.response.use(
         case 401:
           alert('請先登入!')
           router.replace({
-            path: 'login',
+            path: '/login',
           });
       }
     }
