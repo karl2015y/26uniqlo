@@ -69,6 +69,12 @@ const routes = [
         meta: { requiresAuth: true }
       },
       {
+        path: 'orders/:dgid',
+        name: 'OrdersDG',
+        component: () => import(/* webpackChunkName: "about" */ '../components/admin/Orders'),
+        meta: { requiresAuth: true }
+      },
+      {
         path: 'brands',
         name: 'Brands',
         component: () => import(/* webpackChunkName: "about" */ '../components/admin/Brands'),

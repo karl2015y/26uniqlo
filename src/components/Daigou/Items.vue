@@ -7,6 +7,7 @@
 
     <div class="text-right mx-3 mx-md-0">
       <button
+        v-if="daigouorder.status!=1 "
         class="btn btn-outline-primary mt-4"
         @click.prevent="openModal(true)"
       >
@@ -23,7 +24,7 @@
           <th class="text-nowrap text-center">台幣總價錢(NTD)</th>
           <th class="text-nowrap text-center">更新時間</th>
           <th class="text-nowrap text-center">建立時間</th>
-          <th class="text-center" width="120">操作</th>
+          <th v-if="daigouorder.status!=1 " class="text-center" width="120">操作</th>
         </tr>
       </thead>
       <tbody>
@@ -46,7 +47,7 @@
           <td class="text-nowrap text-center">{{ item.up_at }}</td>
           <td class="text-nowrap text-center">{{ item.cr_at }}</td>
 
-          <td class="text-center text-nowrap">
+          <td v-if="daigouorder.status!=1 || $route.path.indexOf('/admin/orders')>-1" class="text-center text-nowrap">
             <button
               class="btn btn-sm btn-outline-info mr-1"
               @click="openModal(false, item)"
@@ -54,6 +55,7 @@
               查看
             </button>
             <button
+            v-if="$route.path.indexOf('/admin/orders')==-1"
               class="btn btn-sm btn-outline-danger"
               @click="openDelModal(item)"
             >
@@ -63,15 +65,18 @@
         </tr>
       </tbody>
     </table>
-<div v-if="amountPrice==0" class="text-center">
-暫無資料，點擊右上角「建立代購品項」來新增代購商品吧
-</div>
-    <hr class="mt-3">
-    <div v-if="amountPrice>0" class="text-right mx-3 mx-md-0">
-    <div ><h3 class="h3">總金額:{{amountPrice}}</h3></div>
-    <button
+    <div v-if="amountPrice == 0" class="text-center">
+      暫無資料，點擊右上角「建立代購品項」來新增代購商品吧
+    </div>
+    <hr class="mt-3" />
+    <div v-if="amountPrice > 0" class="text-right mx-3 mx-md-0">
+      <div>
+        <h3 class="h3">總金額:{{ amountPrice }}</h3>
+      </div>
+      <button
+      v-if="daigouorder.status!=1 "
         class="btn btn-outline-primary mt-4"
-        @click.prevent="openModal(true)"
+        @click.prevent="daigou2cart()"
       >
         將代購單加入購物車
       </button>
@@ -261,6 +266,7 @@ import {
   setDaigouitem,
   deleteDaigouitem,
   updateDaigouitem,
+  daigou2cart
 } from "@/api/daigou";
 
 // import ProductModal from "../modal/ProductModal";
@@ -273,6 +279,7 @@ export default {
       dgid: this.$route.params.dgid,
       daigouitems: [],
       daigouparams: [],
+      daigouorder: [],
       focusDaigouitems: {
         dgurl: "",
         dgtypeId: 2,
@@ -325,12 +332,12 @@ export default {
     amountPrice() {
       //全部代購商品德的價錢
       let vm = this;
-      let ans=0;
+      let ans = 0;
       if (vm.daigouitems && vm.daigouitems.length > 0) {
-       vm.daigouitems.forEach(item=>{
-         ans+=item.total;
-       })
-       return ans;
+        vm.daigouitems.forEach((item) => {
+          ans += item.total;
+        });
+        return ans;
       } else {
         return 0;
       }
@@ -341,6 +348,15 @@ export default {
     this.getDaigouparams();
   },
   methods: {
+    getDaigouorder() {
+      let vm = this;
+      vm.isLoading = true;
+      getDaigouparams().then((res) => {
+        console.log(res);
+        vm.daigouorder = res.data;
+        vm.isLoading = false;
+      });
+    },
     getDaigouparams() {
       let vm = this;
       vm.isLoading = true;
@@ -350,12 +366,24 @@ export default {
         vm.isLoading = false;
       });
     },
+
+     daigou2cart() {
+      let vm = this;
+      vm.isLoading = true;
+      daigou2cart(vm.dgid).then(() => {
+        this.getAllDaigouitems();
+        this.getDaigouparams();
+        vm.isLoading = false;
+        alert("已加入購物車");
+      });
+    },
     getAllDaigouitems() {
       let vm = this;
       vm.isLoading = true;
       getDaigouItems(vm.dgid).then((res) => {
         console.log(res);
         vm.daigouitems = res.data.list;
+        vm.daigouorder = res.data.daigouorder;
         vm.isLoading = false;
       });
     },

@@ -28,13 +28,16 @@
           </td>
           <td class="text-nowrap text-center">{{item.cr_at}}</td>
           <td class="text-center">
-            <span v-if="item.status === 1" class="badge badge-success"
-              >已完成交易</span
+            <span v-if="item.status === 1" class="badge badge-warning text-white"
+              >已加入購物車</span
             >
             <span v-else class="badge badge-light">尚未完成</span>
           </td>
-          <td class="text-center">
-            <button class="btn btn-outline-danger" @click="openDelModal(item)">
+          <td  class="text-center">
+            <button v-if="item.status === 0" class="btn btn-outline-danger" @click="openDelModal(item)">
+              刪除
+            </button>
+            <button v-else class="btn btn-outline-danger" disabled>
               刪除
             </button>
           </td>

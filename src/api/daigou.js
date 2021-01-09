@@ -76,3 +76,14 @@ export function deleteDaigouitem(itemId) {
     }
   });
 }
+
+// 代購單2購物車
+export function daigou2cart(dgid) {
+  return request({
+    url: `/user/daigouorder/dg2cart`,
+    method: "post",
+    data: {
+      dgid: dgid
+    }
+  });
+}

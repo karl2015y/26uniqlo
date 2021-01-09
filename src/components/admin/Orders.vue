@@ -9,8 +9,8 @@
           <th>購買款項</th>
           <th>應付金額</th>
           <th>ago</th>
-          <th>模擬支付</th>
           <th>是否付款</th>
+          <th>操作</th>
         </tr>
       </thead>
       <tbody>
@@ -24,22 +24,35 @@
           <td>
             <ul class="list-unstyled">
               <li v-for="(product, i) in item.products" :key="i">
-                {{ product.name }} 數量：{{ product.count }}
+                <template v-if="product.ppid.indexOf('DG') > -1">
+                  <span @click="openModal(product)" class="btn-link">
+                    查看代購單-{{ product.ppid }}
+                  </span>
+                    <span class="small">費用： {{ product.price }}</span>
+                </template>
+                <template v-else>
+                  {{ product.name }} / 數量：{{ product.count }} / 單價：{{ product.price }}
+                </template>
               </li>
             </ul>
           </td>
           <td class="text-right">{{ item.total }}</td>
           <td class="text-right">{{ item.cr_at }}</td>
           <td>
-            <button class="btn btn-primary btn-sm" @click="openModal(item)">
-              模擬付款
-            </button>
-          </td>
-          <td>
             <strong v-if="item.status === 1" class="text-success"
               >已付款</strong
             >
-            <span v-else class="text-muted">尚未起用</span>
+            <span v-else-if="item.status === 2" class="text-muted">審核中</span>
+            <span v-else class="text-muted">尚未付款</span>
+          </td>
+          <td>
+            <button
+              v-if="item.products.find((item) => item.ppid.indexOf('DG') > -1) && item.status === 2"
+              @click="passOrder(item.ooid)"
+              class="btn btn-primary btn-sm"
+            >
+              代購通過
+            </button>
           </td>
         </tr>
       </tbody>
@@ -59,8 +72,8 @@
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
-            <h5 class="modal-title" id="exampleModalLabel">
-              <span>模擬付款</span>
+            <h5 class="modal-title text-white" id="exampleModalLabel">
+              <span>查看訂單</span>
             </h5>
             <!-- 關閉按鈕 -->
             <button
@@ -73,37 +86,15 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="row">
-              <div class="col-12">
-                <div class="form-group">
-                  <label for="ooid">訂單編號</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="ooid"
-                    v-model="ooid"
-                    placeholder="請輸入標題"
-                    readonly
-                  />
-                </div>
-                <hr />
-              </div>
-            </div>
+            <Items style="padding: 0 !important" v-if="showdg" />
           </div>
           <div class="modal-footer">
             <button
               type="button"
-              class="btn btn-outline-secondary"
-              data-dismiss="modal"
-            >
-              取消
-            </button>
-            <button
-              type="button"
               class="btn btn-primary"
-              @click.prevent="payOrders()"
+              @click.prevent="updateOrder()"
             >
-              確認
+              更新訂單
             </button>
           </div>
         </div>
@@ -114,20 +105,22 @@
 
 <script>
 // import $ from "jquery";
-
+import Items from "@/components/Daigou/Items.vue";
 import Pagination from "../Pagination";
-import { getOrder, payOrder } from "@/api/order";
-
+import { getOrder, payOrder,updateOrderTotal, passOrder } from "@/api/order";
 export default {
   data() {
     return {
       orders: {},
       pagination: {},
       isLoading: false,
-      ooid:null
+      ooid: null,
+      showdg: false,
+      focusOoid:null,
     };
   },
   components: {
+    Items,
     Pagination,
   },
   methods: {
@@ -142,15 +135,46 @@ export default {
     },
     // 打開編輯視窗
     openModal(item) {
-      const vm =this;
+      const vm = this;
+      vm.showdg = false;
+      setTimeout(() => {
+        vm.showdg = true;
+      }, 500);
       window.$("#orderModel").modal("show");
       console.log(item);
-      vm.ooid = item.ooid;
+      vm.$route.params.dgid = item.ppid;
+      vm.focusOoid=item.ooid;
+    },
+
+
+    passOrder(ooid) {
+      const vm = this;
+        vm.isLoading = true;
+
+      passOrder(ooid).then(() => {
+        vm.isLoading = false;
+        this.getOrders();
+        alert("訂單審核已通過");
+      });
+    },
+
+
+    updateOrder() {
+      const vm = this;
+      vm.showdg = false;
+      setTimeout(() => {
+        vm.showdg = true;
+      }, 500);
+      updateOrderTotal(vm.focusOoid).then(() => {
+        vm.isLoading = false;
+        this.getOrders();
+        alert("已更新訂單");
+      });
     },
     payOrders() {
       const vm = this;
       let data = {
-        ooid: vm.ooid
+        ooid: vm.ooid,
       };
       vm.isLoading = true;
 

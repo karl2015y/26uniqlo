@@ -21,7 +21,6 @@
           :key="key"
           :class="{ 'text-secondary': !item.status === 'true' }"
         >
-
           <td class="text-right text-nowrap">{{ item.ooid }}</td>
 
           <td>
@@ -52,17 +51,35 @@
           <td class="text-right text-nowrap">{{ item.cr_at }}</td>
           <td>
             <ul class="list-unstyled">
-              <li class="text-nowrap">收件人：<span v-text="item.name" v-if="item.name"></span></li>
-              <li class="text-nowrap">電話：<span v-text="item.phone" v-if="item.phone"></span></li>
-              <li class="text-nowrap">地址：<span v-text="item.address" v-if="item.address"></span></li>
-              <li class="text-nowrap">Email：<span v-text="item.email" v-if="item.email"></span></li>
+              <li class="text-nowrap">
+                收件人：<span v-text="item.name" v-if="item.name"></span>
+              </li>
+              <li class="text-nowrap">
+                電話：<span v-text="item.phone" v-if="item.phone"></span>
+              </li>
+              <li class="text-nowrap">
+                地址：<span v-text="item.address" v-if="item.address"></span>
+              </li>
+              <li class="text-nowrap">
+                Email：<span v-text="item.email" v-if="item.email"></span>
+              </li>
             </ul>
-           
-            </td>
+          </td>
           <td>
             <ul class="list-unstyled">
               <li v-for="(product, i) in item.products" :key="i">
-                {{ product.name }} 數量：{{ product.count }}
+                <template v-if="product.ppid.indexOf('DG') > -1">
+                  <router-link
+                    class="btn-link"
+                    :to="{ name: 'DaigouItems', params: { dgid: product.ppid } }"
+                  >
+                    {{ product.name }}
+                  </router-link>
+                  <span class="small">費用： {{ product.price }}</span>
+                </template>
+                <template v-else>
+                  {{ product.name }} / 數量：{{ product.count }} / 單價：{{ product.price }}
+                </template>
               </li>
             </ul>
           </td>

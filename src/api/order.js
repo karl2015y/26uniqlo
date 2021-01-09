@@ -37,6 +37,23 @@ export function getOrder(currentPage = 1) {
   });
 }
 
+
+// 代購訂單審核通過
+export function passOrder(ooid) {
+  return request({
+    url: `/admin/order/pass/${ooid}`,
+    method: "post"
+  });
+}
+
+// 更新訂單金額
+export function updateOrderTotal(ooid) {
+  return request({
+    url: `/admin/order/updatetotal/${ooid}`,
+    method: "post"
+  });
+}
+
 // 付款訂單
 export function payOrder(data) {
   return request({
