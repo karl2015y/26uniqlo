@@ -19,6 +19,18 @@ const routes = [
 
   },
   {
+    path: '/blog',
+    name: 'Blog',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Blog.vue'),
+
+  },
+  {
+    path: '/blog/:blog_id',
+    name: 'BlogDetail',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/BlogDetail.vue'),
+
+  },
+  {
     path: '/pd/:product_id',
     name: 'ProductDetail',
     component: () => import(/* webpackChunkName: "about" */ '../views/user/ProductDetail.vue'),
@@ -62,6 +74,12 @@ const routes = [
     component: Dashboard,
     meta: { requiresAuth: true },
     children: [
+      {
+        path: 'blogs',
+        name: 'Blogs',
+        component: () => import(/* webpackChunkName: "about" */ '../components/admin/Blogs'),
+    
+      },
       {
         path: 'products',
         name: 'Products',
