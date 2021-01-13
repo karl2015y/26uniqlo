@@ -19,6 +19,12 @@ const routes = [
 
   },
   {
+    path: '/pd/:product_id',
+    name: 'ProductDetail',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/ProductDetail.vue'),
+
+  },
+  {
     path: '/login',
     name: 'Login',
 

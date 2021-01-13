@@ -3,6 +3,15 @@ import request from "@/utils/request";
 
 
 // 取得商品資料 (不需要權限)
+export function getProduct(id) {
+  return request({
+    url: `/product/${id}`,
+    method: "get",
+  });
+}
+
+
+// 取得商品資料 (不需要權限)
 export function getProduct_pages(page = 1) {
   return request({
     url: `/getproduct?page=${page}`,

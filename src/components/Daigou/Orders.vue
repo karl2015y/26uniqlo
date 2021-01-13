@@ -29,7 +29,7 @@
           <td class="text-nowrap text-center">{{item.cr_at}}</td>
           <td class="text-center">
             <span v-if="item.status === 1" class="badge badge-warning text-white"
-              >已加入購物車</span
+              >已交易</span
             >
             <span v-else class="badge badge-light">尚未完成</span>
           </td>

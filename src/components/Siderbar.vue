@@ -66,7 +66,7 @@
               >
                 管理台
               </router-link>
-              <a href="#" class="p-2 text-danger" @click.prevent="logout"
+              <a href="javascript:;" class="p-2 text-danger" @click.prevent="logout"
                 >登出</a
               >
             </div>

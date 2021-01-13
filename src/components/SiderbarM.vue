@@ -28,7 +28,7 @@
       <div class="offsetmenu home-five">
         <div class="offsetmenu__inner sidebar__menu--inner">
           <div class="offsetmenu__close__btn">
-            <a href="#"><i class="zmdi zmdi-close"></i></a>
+            <a href="javascript:;"><i class="zmdi zmdi-close"></i></a>
           </div>
           <div class="off__contact">
             <div class="logo">
@@ -95,7 +95,7 @@
               </li>
 
               <li>
-                <a class="bg--google" href="#" target="_blank" title="Google"
+                <a class="bg--google" href="javascript:;" target="_blank" title="Google"
                   ><i class="zmdi zmdi-google"></i
                 ></a>
               </li>

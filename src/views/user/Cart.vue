@@ -33,11 +33,16 @@
       <div class="mx-auto mt-3 px-0 px-md-4">
         <div class="row">
           <aside class="col-lg-9">
-
-            <div v-if="cart.cart_normallist.length==0 && cart.cart_daigoulist.length==0" class="card p-4">
+            <div
+              v-if="
+                cart.cart_normallist.length == 0 &&
+                cart.cart_daigoulist.length == 0
+              "
+              class="card p-4"
+            >
               購物車暫無訂單，再去逛逛吧~
             </div>
-            <div v-if="cart.cart_normallist.length>0" class="card">
+            <div v-if="cart.cart_normallist.length > 0" class="card">
               <div class="table-responsive">
                 <table class="table table-borderless table-shopping-cart">
                   <thead class="text-muted">
@@ -45,11 +50,7 @@
                       <th scope="col" width="200">產品名稱</th>
                       <th scope="col" width="120">數量</th>
                       <th scope="col" width="120">價錢</th>
-                      <th
-                        scope="col"
-                        class="text-center"
-                        width="120"
-                      >操作</th>
+                      <th scope="col" class="text-center" width="120">操作</th>
                     </tr>
                   </thead>
                   <tbody v-if="cart !== null">
@@ -62,15 +63,11 @@
                             </div>
                             <figcaption class="info">
                               <a
-                                href="#"
+                                href="javascript:;"
                                 class="title text-dark"
                                 data-abc="true"
                                 >{{ item.name }}</a
                               >
-                              <p class="text-muted small">
-                                SIZE: L <br />
-                                Brand: MAXTRA
-                              </p>
                             </figcaption>
                           </figure>
                         </td>
@@ -107,21 +104,15 @@
                 </table>
               </div>
             </div>
-            <div v-if="cart.cart_daigoulist.length>0" class="card">
+            <div v-if="cart.cart_daigoulist.length > 0" class="card">
               <div class="table-responsive">
                 <table class="table table-borderless table-shopping-cart">
                   <thead class="text-muted">
                     <tr class="small text-uppercase">
                       <th scope="col" width="200">代購單號</th>
-                      <th scope="col" >訂單備註</th>
+                      <th scope="col">訂單備註</th>
                       <th scope="col" width="120">價錢</th>
-                      <th
-                        scope="col"
-                        class="text-center"
-                        width="120"
-                      >
-                        操作
-                      </th>
+                      <th scope="col" class="text-center" width="120">操作</th>
                     </tr>
                   </thead>
                   <tbody v-if="cart !== null">
@@ -185,7 +176,7 @@
 
               <div class="mb-3">
                 <label for="email"
-                  >Email <span class="text-muted">(Optional)</span></label
+                  >Email</label
                 >
                 <input
                   type="email"
@@ -244,7 +235,7 @@
               </div> -->
                 <hr />
                 <button
-                  href="#"
+                  href="javascript:;"
                   class="btn btn-out btn-primary btn-square btn-main"
                   data-abc="true"
                   @click="createOrder()"
@@ -288,8 +279,8 @@ export default {
   data() {
     return {
       cart: {
-        cart_normallist:[],
-        cart_daigoulist:[],
+        cart_normallist: [],
+        cart_daigoulist: [],
       },
       status: null,
       name: null,
@@ -307,11 +298,13 @@ export default {
       const vm = this;
       getCarts().then(function (res) {
         vm.cart = res.data;
-        vm.cart.cart_normallist  = vm.cart.cart_list.filter(function(item){
-          return item.category != "Daigou"; 
+        vm.email = vm.cart.user_email
+        vm.name = vm.cart.user_name
+        vm.cart.cart_normallist = vm.cart.cart_list.filter(function (item) {
+          return item.category != "Daigou";
         });
-        vm.cart.cart_daigoulist  = vm.cart.cart_list.filter(function(item){
-          return item.category == "Daigou"; 
+        vm.cart.cart_daigoulist = vm.cart.cart_list.filter(function (item) {
+          return item.category == "Daigou";
         });
       });
     },
@@ -325,6 +318,7 @@ export default {
       const vm = this;
       updateCarts(item).then(function () {
         vm.getCart();
+        alert("更新成功");
       });
     },
     createOrder() {
@@ -335,20 +329,19 @@ export default {
         address: vm.address,
         phone: vm.phone,
       };
-      createOrders(data).then(function (res) {
-        if(res.data && res.data.needCheck){
-          vm.getCart();
-          alert("訂單因包含代購商品，已將此訂單送審")
-        }else{
-          vm.$refs.ecpay.innerHTML = res.data;
-        document.getElementById("__ecpayForm").style.visibility = "hidden";
-        document.getElementById("__ecpayForm").submit();
-        vm.getCart();
-        }
-        
-      }).catch(()=>{
-        alert("訂單資料錯誤!")
-      });
+      createOrders(data)
+        .then(function (res) {
+          if (res.data && res.data.needCheck) {
+            vm.getCart();
+            alert("訂單因包含代購商品，已將此訂單送審");
+            vm.$router.push({ name: "Myorder" });
+          } else {
+            vm.$router.push({ name: "Myorder" });
+          }
+        })
+        .catch(() => {
+          alert("訂單資料錯誤!");
+        });
     },
   },
 };

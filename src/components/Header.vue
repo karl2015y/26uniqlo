@@ -59,8 +59,8 @@
                         >Variable Product</a
                       >
                       <ul class="mega__item">
-                        <li><a href="#">Category</a></li>
-                        <li><a href="#">My Account</a></li>
+                        <li><a href="javascript:;">Category</a></li>
+                        <li><a href="javascript:;">My Account</a></li>
                         <li><a href="wishlist.html">Wishlist</a></li>
                         <li><a href="cart.html">Shopping Carte</a></li>
                         <li><a href="checkout.html">Checkout</a></li>
@@ -71,18 +71,18 @@
                     <li>
                       <a class="mega__title" href="shop.html">Product Types</a>
                       <ul class="mega__item">
-                        <li><a href="#">Simple Product</a></li>
-                        <li><a href="#">Variable Product</a></li>
-                        <li><a href="#">Grouped Product</a></li>
-                        <li><a href="#">Downloadable Product</a></li>
-                        <li><a href="#">Simple Product</a></li>
+                        <li><a href="javascript:;">Simple Product</a></li>
+                        <li><a href="javascript:;">Variable Product</a></li>
+                        <li><a href="javascript:;">Grouped Product</a></li>
+                        <li><a href="javascript:;">Downloadable Product</a></li>
+                        <li><a href="javascript:;">Simple Product</a></li>
                       </ul>
                     </li>
                     <!-- End Single Mega MEnu -->
                   </ul>
                 </li>
                 <li class="drop">
-                  <a href="#">pages</a>
+                  <a href="javascript:;">pages</a>
                   <ul class="dropdown">
                     <li><a href="about.html">about</a></li>
                     <li><a href="shop.html">shop</a></li>
@@ -125,7 +125,7 @@
                     </ul>
                   </li>
                   <li>
-                    <a href="#">pages</a>
+                    <a href="javascript:;">pages</a>
                     <ul>
                       <li><a href="about.html">about</a></li>
                       <li><a href="shop.html">shop</a></li>
@@ -160,7 +160,7 @@
                   >
                     管理台
                   </router-link>
-                  <a href="#" class="p-2 text-danger" @click.prevent="logout"
+                  <a href="javascript:;" class="p-2 text-danger" @click.prevent="logout"
                     >登出</a
                   >
                 </div>

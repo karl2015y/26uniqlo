@@ -23,8 +23,8 @@
                                     <h2 class="ft__title--2">Contact Us</h2>
                                     <div class="footer__inner">
                                         <p>319 Clematis St.Suite 100 WPB, FL 33401</p>
-                                        <p>Mail :<a href="#">uniqlo@gmail.com</a></p>
-                                        <p>Phone :<a href="#">012 0525 055</a></p>
+                                        <p>Mail :<a href="javascript:;">uniqlo@gmail.com</a></p>
+                                        <p>Phone :<a href="javascript:;">012 0525 055</a></p>
                                     </div>
                                 </div>
                             </div>

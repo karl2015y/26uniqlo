@@ -71,14 +71,27 @@
                 <template v-if="product.ppid.indexOf('DG') > -1">
                   <router-link
                     class="btn-link"
-                    :to="{ name: 'DaigouItems', params: { dgid: product.ppid } }"
+                    :to="{
+                      name: 'DaigouItems',
+                      params: { dgid: product.ppid },
+                    }"
                   >
                     {{ product.name }}
                   </router-link>
-                  <span class="small">費用： {{ product.price }}</span>
+                  <span class="small"> | 費用： {{ product.price }}</span>
                 </template>
                 <template v-else>
-                  {{ product.name }} / 數量：{{ product.count }} / 單價：{{ product.price }}
+                  <router-link
+                    class="btn-link"
+                    :to="{
+                      name: 'ProductDetail',
+                      params: { product_id: product.ppid },
+                    }"
+                  >
+                    {{ product.name }}
+                  </router-link>
+                  <span class="small"> | 費用： {{ product.price * product.count }}</span>
+
                 </template>
               </li>
             </ul>

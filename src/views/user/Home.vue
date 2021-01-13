@@ -41,7 +41,7 @@
           <div class="product foo">
             <div class="product__inner">
               <div class="pro__thumb">
-                <a href="#">
+                <a href="javascript:;">
                   <img :src="item.pimg" alt="product images" />
                 </a>
               </div>
@@ -53,7 +53,7 @@
                       data-target="#productModal"
                       title="Quick View"
                       class="quick-view modal-view detail-link"
-                      href="#"
+                      href="javascript:;"
                       ><span class="ti-eye"></span
                     ></a>
                   </li>
@@ -123,7 +123,7 @@
                       <li><span class="ti-star"></span></li>
                     </ul>
                     <div class="review">
-                      <a href="#">4 customer reviews</a>
+                      <a href="javascript:;">4 customer reviews</a>
                     </div>
                   </div>
                   <div class="price-box-3">
@@ -140,24 +140,24 @@
                   <div class="select__color">
                     <h2>Select color</h2>
                     <ul class="color__list">
-                      <li class="red"><a title="Red" href="#">Red</a></li>
-                      <li class="gold"><a title="Gold" href="#">Gold</a></li>
+                      <li class="red"><a title="Red" href="javascript:;">Red</a></li>
+                      <li class="gold"><a title="Gold" href="javascript:;">Gold</a></li>
                       <li class="orange">
-                        <a title="Orange" href="#">Orange</a>
+                        <a title="Orange" href="javascript:;">Orange</a>
                       </li>
                       <li class="orange">
-                        <a title="Orange" href="#">Orange</a>
+                        <a title="Orange" href="javascript:;">Orange</a>
                       </li>
                     </ul>
                   </div>
                   <div class="select__size">
                     <h2>Select size</h2>
                     <ul class="color__list">
-                      <li class="l__size"><a title="L" href="#">L</a></li>
-                      <li class="m__size"><a title="M" href="#">M</a></li>
-                      <li class="s__size"><a title="S" href="#">S</a></li>
-                      <li class="xl__size"><a title="XL" href="#">XL</a></li>
-                      <li class="xxl__size"><a title="XXL" href="#">XXL</a></li>
+                      <li class="l__size"><a title="L" href="javascript:;">L</a></li>
+                      <li class="m__size"><a title="M" href="javascript:;">M</a></li>
+                      <li class="s__size"><a title="S" href="javascript:;">S</a></li>
+                      <li class="xl__size"><a title="XL" href="javascript:;">XL</a></li>
+                      <li class="xxl__size"><a title="XXL" href="javascript:;">XXL</a></li>
                     </ul>
                   </div>
                   <div class="social-sharing">
@@ -168,7 +168,7 @@
                           <a
                             target="_blank"
                             title="rss"
-                            href="#"
+                            href="javascript:;"
                             class="rss social-icon"
                             ><i class="zmdi zmdi-rss"></i
                           ></a>
@@ -177,7 +177,7 @@
                           <a
                             target="_blank"
                             title="Linkedin"
-                            href="#"
+                            href="javascript:;"
                             class="linkedin social-icon"
                             ><i class="zmdi zmdi-linkedin"></i
                           ></a>
@@ -186,7 +186,7 @@
                           <a
                             target="_blank"
                             title="Pinterest"
-                            href="#"
+                            href="javascript:;"
                             class="pinterest social-icon"
                             ><i class="zmdi zmdi-pinterest"></i
                           ></a>
@@ -195,7 +195,7 @@
                           <a
                             target="_blank"
                             title="Tumblr"
-                            href="#"
+                            href="javascript:;"
                             class="tumblr social-icon"
                             ><i class="zmdi zmdi-tumblr"></i
                           ></a>
@@ -204,7 +204,7 @@
                           <a
                             target="_blank"
                             title="Pinterest"
-                            href="#"
+                            href="javascript:;"
                             class="pinterest social-icon"
                             ><i class="zmdi zmdi-pinterest"></i
                           ></a>
@@ -213,7 +213,7 @@
                     </div>
                   </div>
                   <div class="addtocart-btn">
-                    <a href="#">Add to cart</a>
+                    <a href="javascript:;">Add to cart</a>
                   </div>
                 </div>
                 <!-- .product-info -->

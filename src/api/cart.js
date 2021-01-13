@@ -20,12 +20,13 @@ export function deleteCarts(data) {
 }
 
 // 新增單項購物車產品
-export function addCarts(data) {
+export function addCarts(data,count=1) {
   return request({
     url: `/user/cart`,
     method: "post",
     data: {
-      ppid: data.ppid
+      ppid: data.ppid,
+      count: count
     }
   });
 }

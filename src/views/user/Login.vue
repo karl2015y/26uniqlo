@@ -25,7 +25,7 @@
                                 <!-- <div class="tabs__checkbox">
                                     <input type="checkbox">
                                     <span> Remember me</span>
-                                    <span class="forget"><a href="#">Forget Pasword?</a></span>
+                                    <span class="forget"><a href="javascript:;">Forget Pasword?</a></span>
                                 </div> -->
                                 <div class="htc__login__btn mt--30">
                                     <a href="javascript:;"  @click="signin()">登入</a>
