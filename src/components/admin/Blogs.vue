@@ -31,9 +31,7 @@
             <img :src="item.bimg" v-if="item.bimg" :alt="`圖片${item.name}`" />
           </td>
           <td>
-            <p style="white-space: pre-line">
-              {{ item.description }}
-            </p>
+            <p v-html="item.description" style="white-space: pre-line"></p>
           </td>
 
           <td>
@@ -121,11 +119,11 @@
                 <hr />
 
                 <div class="form-group">
-                  <label for="description">文章描述</label>
+                  <label for="editor">文章描述</label>
                   <textarea
+                    id="editor"
                     type="text"
                     class="form-control"
-                    id="description"
                     v-model="tempBlog.description"
                     placeholder="請輸入文章描述"
                   ></textarea>
@@ -197,11 +195,7 @@
             >
               不刪除
             </button>
-            <button
-              type="button"
-              class="btn btn-danger"
-              @click="deleteBlog()"
-            >
+            <button type="button" class="btn btn-danger" @click="deleteBlog()">
               刪除
             </button>
           </div>
@@ -212,6 +206,8 @@
 </template>
 
 <script>
+import ImgurUploaderInit from "ckeditor5-imgur-uploader";
+
 import {
   getAllBlog,
   updateBlog,
@@ -224,6 +220,7 @@ import Pagination from "../Pagination";
 export default {
   data() {
     return {
+      editor: {},
       blogs: [],
       tempBlog: {},
       isNew: false, //判斷新增視窗還是修改視窗
@@ -251,6 +248,22 @@ export default {
     },
     // 打開編輯視窗
     openModal(isNew, item) {
+      let vm = this;
+
+      if (document.querySelector("#editor").style.display != "none") {
+        const ImgurUploader = ImgurUploaderInit({ clientID: "f10b8924e90bee5" });
+        console.log(ImgurUploader);
+        window.ClassicEditor.create(
+          document.querySelector("#editor", { extraPlugins: [ImgurUploader] })
+        )
+          .then((newEditor) => {
+            vm.editor = newEditor;
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      }
+
       console.log(isNew, item);
       if (isNew) {
         this.tempBlog = {};
@@ -272,6 +285,7 @@ export default {
       console.log(vm.isNew);
       if (!vm.isNew) {
         // 如果不是新文章,則切換成更新文章
+        vm.tempBlog.description = vm.editor.getData();
         updateBlog(vm.tempBlog).then((response) => {
           window.$("#blogModal").modal("hide");
           if (response.data.success) {
@@ -284,6 +298,8 @@ export default {
       } else {
         console.log("here 新文章");
         // 新文章
+        vm.tempBlog.description = vm.editor.getData();
+
         newBlog(vm.tempBlog).then((response) => {
           window.$("#blogModal").modal("hide");
           if (response.data.success) {
@@ -306,7 +322,7 @@ export default {
         console.log(response);
         vm.isLoading = false;
         if (response.data.success) {
-          console.log("uploadFile",response.data);
+          console.log("uploadFile", response.data);
           vm.$set(vm.tempBlog, "bimg", response.data.data.bimg);
         }
       });
