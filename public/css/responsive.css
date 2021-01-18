@@ -592,6 +592,7 @@
 /* small mobile :320px. */
 @media (max-width: 767px) {
   
+  
 .container {width:300px}
 
 /*------------------
@@ -1080,7 +1081,7 @@ blockquote::before {
   width: 100%;
 }
 .slider__container.slider--7 .slider__fornt__inner img {
-  display: none;
+  /* display: none; */
 }
 .slider--7 .slider__inner h4 {
   font-size: 18px;

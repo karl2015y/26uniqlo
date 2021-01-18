@@ -41,7 +41,49 @@
                                 <div class="col-md-9 col-lg-10 col-sm-12 col-xs-12">
                                     <div class="slider__inner">
                                         <div class="slider__inner">
-                                        <h4>Welcome To Uniqlo Store </h4>
+                                        <h4>1Welcome To Uniqlo Store </h4>
+                                        <h1>New Men Collection<br>In 2018 </h1>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider__fornt__images">
+                            <div class="slider__fornt__inner">
+                                <img src="images/slider/fornt-img/man-style.png" alt="slider images">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Slide -->
+                                        <!-- Start Single Slide -->
+                    <div class="slide slider__full--screen">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="slider__inner">
+                                        <div class="slider__inner">
+                                        <h4>2Welcome To Uniqlo Store </h4>
+                                        <h1>New Men Collection<br>In 2018 </h1>
+                                    </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slider__fornt__images">
+                            <div class="slider__fornt__inner">
+                                <img src="images/slider/fornt-img/man-style.png" alt="slider images">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Single Slide -->
+                                        <!-- Start Single Slide -->
+                    <div class="slide slider__full--screen">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-9 col-lg-10 col-sm-12 col-xs-12">
+                                    <div class="slider__inner">
+                                        <div class="slider__inner">
+                                        <h4>3Welcome To Uniqlo Store </h4>
                                         <h1>New Men Collection<br>In 2018 </h1>
                                     </div>
                                     </div>
@@ -344,15 +386,7 @@
                             </div>
                             <!-- End Single Product -->
                         </div>
-                        <!-- Start Load More BTn -->
-                        <div class="row mt--60">
-                            <div class="col-md-12">
-                                <div class="htc__loadmore__btn loadmore__2">
-                                    <a href="#">load more</a>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End Load More BTn -->
+ 
                     </div>
                 </div>
             </section>
@@ -518,7 +552,7 @@ export default {
 
   },
   mounted(){
-           window.$('.slider__activation__wrap').owlCarousel({
+    window.$('.slider__activation__wrap').owlCarousel({
       loop: true,
       margin:0,
       nav:true,

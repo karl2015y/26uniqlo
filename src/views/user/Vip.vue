@@ -80,14 +80,14 @@
 </template>
 
 <script>
-import { getBlog } from "@/api/blog";
+import { getBlog_pages } from "@/api/blog";
 // import { addCarts } from "@/api/cart";
 import Footer from "@/components/Footer.vue";
 import Siderbar from "@/components/Siderbar.vue";
 import SiderbarM from "@/components/SiderbarM.vue";
 
 export default {
-  name: "BlogDetail",
+  name: "Vip",
   components: {
     // Header,
     Footer,
@@ -109,32 +109,19 @@ export default {
     getBlog() {
       const vm = this;
       vm.isLoading = true;
-      getBlog(vm.$route.params.blog_id)
-        .then(function (res) {
-          // console.log("blog_list",res);
-          vm.blog = res.data;
-          vm.isLoading = false;
-        });
+
+          getBlog_pages("Vip",1).then(function (res) {
+        vm.blog = res.data.blog_list.data[0];
+        vm.isLoading = false;
+      });
     },
-    // addtoCarts() {
-    //   const vm = this;
-    //   addCarts(vm.plist, vm.num)
-    //     .then(function (res) {
-    //       if (res && res.data && res.data.result) {
-    //         alert("已加入購物車");
-    //       }
-    //       console.log(res);
-    //     })
-    //     .catch((error) => {
-    //       if (error.response.data && error.response.data.message) {
-    //         alert(error.response.data.message);
-    //       }
-    //       // console.log(error.response.data.message);
-    //     });
-    // },
+
   },
 };
 </script>
 
 <style lang="scss">
+table{
+  width: 100%;
+}
 </style>

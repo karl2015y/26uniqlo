@@ -36,8 +36,9 @@
             </li>
             <li :class="{'current':$route.name=='Daigou'||$route.name=='DaigouItems'}"><router-link to="/daigou">客制化代購服務（計價方式）</router-link></li>
             <li><a href="shop.html"></a></li>
-            <li :class="{'current':$route.path=='/blog/1'}"><a href="/#/blog/1">會員專區（VIP説明）</a></li>
-            <li :class="{'current': (($route.name=='Blog'||$route.name=='BlogDetail')&&$route.path!='/blog/1')}"><a href="/#/blog">Blog</a></li>
+            <li :class="{'current':$route.path=='/blog/1'}"></li>
+            <li :class="{'current': (($route.name=='Vip'))}"><router-link to="/vip"> 會員專區（VIP説明）</router-link></li>
+            <li :class="{'current': (($route.name=='Blog'||$route.name=='BlogDetail'))}"><a href="/#/blog">Blog</a></li>
             <li :class="{'current':$route.name=='Cart'}"><a href="/#/cart">購物車</a></li>
             <li :class="{'current':$route.name=='Myorder'}"><a href="/#/myorder">歷史訂單</a></li>
           </ul>

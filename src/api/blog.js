@@ -12,9 +12,9 @@ export function getBlog(id) {
 
 
 // 取得文章資料 (不需要權限)
-export function getBlog_pages(page = 1) {
+export function getBlog_pages(type ="",page = 1) {
   return request({
-    url: `/blogs?page=${page}`,
+    url: `/blogs?type=${type}&page=${page}`,
     method: "get",
   });
 }
@@ -22,9 +22,9 @@ export function getBlog_pages(page = 1) {
 
 //＝＝＝管理員＝＝＝
 // 取得文章資料 
-export function getAllBlog() {
+export function getAllBlog(type ="",page=1) {
   return request({
-    url: `/admin/blogs`,
+    url: `/admin/blogs?type=${type}&page=${page}`,
     method: "get",
   });
 }

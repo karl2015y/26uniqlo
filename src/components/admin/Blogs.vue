@@ -1,20 +1,29 @@
 <template>
   <div>
     <loading :active.sync="isLoading"></loading>
-    <div class="text-right">
-      <button
-        class="btn btn-outline-primary mt-4"
-        @click.prevent="openModal(true)"
-      >
-        建立新的文章
-      </button>
+    <div class="d-flex justify-content-between mt-4">
+      <div>
+        <div class="btn-group btn-group" role="group" aria-label="選擇新增類別">
+          <button @click="type='Home'" :class="{'active': type=='Home'}" type="button" class="btn btn-secondary">首頁Banner</button>
+          <button @click="type='Blog'" :class="{'active': type=='Blog'}" type="button" class="btn btn-secondary">Blog文章</button>
+          <button @click="type='Vip'" :class="{'active': type=='Vip'}" type="button" class="btn btn-secondary">VIP會員說明</button>
+        </div>
+      </div>
+      <div>
+        <button
+          class="btn btn-outline-primary"
+          @click.prevent="openModal(true)"
+        >
+          建立新的{{type_chi}}
+        </button>
+      </div>
     </div>
     <table class="table mt-4" style="font-size: 1rem">
       <thead>
         <tr>
-          <th width="100">文章名稱</th>
+          <th width="180">{{type_chi}}名稱</th>
           <th width="120">圖片</th>
-          <th>文章內容</th>
+          <th>{{type_chi}}內容</th>
           <th width="100">編輯</th>
           <th width="120">刪除</th>
         </tr>
@@ -64,7 +73,7 @@
         <div class="modal-content border-0">
           <div class="modal-header bg-dark text-white">
             <h5 class="modal-title" id="exampleModalLabel">
-              <span>新增文章</span>
+              <span class="text-white">新增{{type_chi}}</span>
             </h5>
             <!-- 關閉按鈕 -->
             <button
@@ -119,13 +128,13 @@
                 <hr />
 
                 <div class="form-group">
-                  <label for="editor">文章描述</label>
+                  <label for="editor">{{type_chi}}描述</label>
                   <textarea
                     id="editor"
                     type="text"
                     class="form-control"
                     v-model="tempBlog.description"
-                    placeholder="請輸入文章描述"
+                    :placeholder="`請輸入${type_chi}描述`"
                   ></textarea>
                 </div>
                 <div class="form-group">
@@ -186,7 +195,7 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">真的要刪除文章：{{ tempBlog.name }}嗎？</div>
+          <div class="modal-body">真的要刪除{{type_chi}}：{{ tempBlog.name }}嗎？</div>
           <div class="modal-footer">
             <button
               type="button"
@@ -220,6 +229,7 @@ import Pagination from "../Pagination";
 export default {
   data() {
     return {
+      type:"Home",
       editor: {},
       blogs: [],
       tempBlog: {},
@@ -232,15 +242,29 @@ export default {
     // ProductModal
     Pagination,
   },
+  computed:{
+    type_chi(){
+      const vm = this;
+      vm.getBlog();
+
+      if(vm.type=="Home"){
+        return "首頁Banner"
+      }else if(vm.type=="Blog"){
+         return "Blog文章"
+      }else{
+         return "VIP會員說明"
+      }
+
+    }
+  },
   created() {
-    this.getBlog();
+    // this.getBlog();
   },
   methods: {
     getBlog(page = 1) {
       let vm = this;
       vm.isLoading = true;
-
-      getAllBlog(page).then((response) => {
+      getAllBlog(vm.type, page).then((response) => {
         vm.blogs = response.data.blog_list.data;
         vm.pagination = response.data.blog_list;
         vm.isLoading = false;
@@ -251,7 +275,9 @@ export default {
       let vm = this;
 
       if (document.querySelector("#editor").style.display != "none") {
-        const ImgurUploader = ImgurUploaderInit({ clientID: "f10b8924e90bee5" });
+        const ImgurUploader = ImgurUploaderInit({
+          clientID: "f10b8924e90bee5",
+        });
         console.log(ImgurUploader);
         window.ClassicEditor.create(
           document.querySelector("#editor", { extraPlugins: [ImgurUploader] })
@@ -286,6 +312,7 @@ export default {
       if (!vm.isNew) {
         // 如果不是新文章,則切換成更新文章
         vm.tempBlog.description = vm.editor.getData();
+        vm.tempBlog.type = vm.type;
         updateBlog(vm.tempBlog).then((response) => {
           window.$("#blogModal").modal("hide");
           if (response.data.success) {
@@ -299,7 +326,7 @@ export default {
         console.log("here 新文章");
         // 新文章
         vm.tempBlog.description = vm.editor.getData();
-
+        vm.tempBlog.type = vm.type;
         newBlog(vm.tempBlog).then((response) => {
           window.$("#blogModal").modal("hide");
           if (response.data.success) {

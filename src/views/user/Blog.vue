@@ -133,29 +133,14 @@ export default {
     getBlog(currentPage = 1) {
       const vm = this;
       vm.isLoading = true;
-      getBlog_pages(currentPage).then(function (res) {
+      getBlog_pages("Blog",currentPage).then(function (res) {
         vm.pagination = res.data.blog_list;
         // console.log("blog_list",res);
         vm.blogs = res.data.blog_list.data;
         vm.isLoading = false;
       });
     },
-    // addtoCarts() {
-    //   const vm = this;
-    //   addCarts(vm.plist, vm.num)
-    //     .then(function (res) {
-    //       if (res && res.data && res.data.result) {
-    //         alert("已加入購物車");
-    //       }
-    //       console.log(res);
-    //     })
-    //     .catch((error) => {
-    //       if (error.response.data && error.response.data.message) {
-    //         alert(error.response.data.message);
-    //       }
-    //       // console.log(error.response.data.message);
-    //     });
-    // },
+
   },
 };
 </script>

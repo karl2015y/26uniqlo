@@ -901,10 +901,10 @@ h3.widget-title-modal {
 
 .blog__post__time {
     background: #fff none repeat scroll 0 0;
-    height: 65px;
+    height: 2.5rem;
     padding: 5px;
     text-align: center;
-    width: 65px;
+    width: 9rem;
 }
 .blog__post__time span.date {
     display: block;
@@ -2865,7 +2865,7 @@ select.select-color {
         display: none;
     }
     .slider--7 .slider__fornt__images {
-      display: none;
+        max-width: 50%;
     }
     .slider--7 .slider__inner h1 {
       font-size: 40px;
@@ -2889,6 +2889,9 @@ select.select-color {
 
 
 @media (max-width: 767px){
+    .slider--7 .slider__fornt__images {
+        max-width: 50%;
+    }
     .wrapper__sidebar .container-fluid {
       width: 100%;
     }
@@ -2923,13 +2926,13 @@ select.select-color {
     color: #fff;
     font-size: 30px;
     font-weight: 700;
-    height: 72px;
+    height: 2.8rem;
     left: 20px;
     line-height: 42px;
     position: absolute;
     text-align: center;
     top: 20px;
-    width: 72px;
+    width: 9rem;
 }
 .upcoming-date span {
     color: #fff;
