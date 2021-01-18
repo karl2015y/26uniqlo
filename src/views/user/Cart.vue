@@ -1,29 +1,5 @@
 <template>
   <div class="wrapper home-7 wrapper__sidebar home-v5 wrapper__sidebar--left">
-    <div class="mobile-content lg-device-hide">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- Start MAinmenu Ares -->
-          <div class="col-5">
-            <div class="logo">
-              <a href="/">
-                <img src="images/logo/uniqlo.png" alt="logo" />
-              </a>
-            </div>
-          </div>
-          <!-- End MAinmenu Ares -->
-          <div class="col-7 text-right">
-            <ul class="menu-extra text-right">
-              <li>
-                <a href="login-register.html"><span class="ti-user"></span></a>
-              </li>
-              <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
-              <li class="toggle__menu"><span class="ti-menu"></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- 電腦版MENU -->
     <Siderbar />
     <!-- 手機版MENU -->
@@ -205,11 +181,14 @@
                   type="text"
                   class="form-control"
                   id="address"
-                  placeholder="請輸入地址 ex:高雄市楠梓區xx路xx號"
+                  placeholder="請輸入地址或門市名稱"
                   required=""
                   v-model="address"
                 />
               </div>
+              <a target="_blank" class="btn-link" href="https://emap.pcsc.com.tw/">7-11門市查詢</a>
+              <a target="_blank" class="ml-3 btn-link" href="https://www.family.com.tw/marketing/inquiry.aspx">全家門市查詢</a>
+              
             </form>
           </aside>
           <aside class="col-lg-3">

@@ -1,36 +1,16 @@
 <template>
   <div class="wrapper home-7 wrapper__sidebar home-v5 wrapper__sidebar--left">
     <Loading :active.sync="isLoading"></Loading>
-    <div class="mobile-content lg-device-hide">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- Start MAinmenu Ares -->
-          <div class="col-5">
-            <div class="logo">
-              <a href="/">
-                <img src="images/logo/uniqlo.png" alt="logo" />
-              </a>
-            </div>
-          </div>
-          <!-- End MAinmenu Ares -->
-          <div class="col-7 text-right">
-            <ul class="menu-extra text-right">
-              <li>
-                <a href="login-register.html"><span class="ti-user"></span></a>
-              </li>
-              <li class="cart__menu"><span class="ti-shopping-cart"></span></li>
-              <li class="toggle__menu"><span class="ti-menu"></span></li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
     <!-- 電腦版MENU -->
     <Siderbar />
     <!-- 手機版MENU -->
 
     <SiderbarM>
-      <h3 class="pl-4 pt-4 h2">{{ $route.query.brand }}</h3>
+   
+          <h3 class="pl-4 pt-4 h2">{{ $route.query.brand }}</h3>
+
+
+      <p class="mx-4" v-if="brand" v-html="brand.description"></p>
       <div
         v-if="
           product_list != null &&
@@ -56,7 +36,7 @@
           <div class="product foo">
             <div class="product__inner">
               <div class="pro__thumb">
-                <a :href="`/#/pd/${item.ppid}`">
+                <a :href="`#/pd/${item.ppid}`">
                   <img :src="item.pimg" alt="product images" />
                 </a>
               </div>
@@ -78,10 +58,10 @@
             </div>
             <div class="product__details">
               <h2 v-if="item.count == 0">
-                <a :href="`/#/pd/${item.ppid}`">{{ item.name }}（無庫存）</a>
+                <a :href="`#/pd/${item.ppid}`">{{ item.name }}（無庫存）</a>
               </h2>
               <h2 v-else>
-                <a :href="`/#/pd/${item.ppid}`">{{ item.name }}</a>
+                <a :href="`#/pd/${item.ppid}`">{{ item.name }}</a>
               </h2>
               <ul class="product__price">
                 <template v-if="item.origin_price != item.price">
@@ -96,8 +76,14 @@
           </div>
         </div>
         <!-- End Single Product -->
+        
       </div>
-
+      <Pagination
+        class="d-flex justify-content-center"
+        style="margin-top: -35px"
+        :compo-pages="pagination"
+        @emitPages="getProduct"
+      ></Pagination>
       <!-- Start Footer Area -->
       <Footer />
       <!-- End Footer Area -->
@@ -108,6 +94,8 @@
 <script>
 import { getProductbyBrand_pages } from "@/api/product";
 import { addCarts } from "@/api/cart";
+import Pagination from "@/components/Pagination";
+
 import Footer from "@/components/Footer.vue";
 import Siderbar from "@/components/Siderbar.vue";
 import SiderbarM from "@/components/SiderbarM.vue";
@@ -119,13 +107,16 @@ export default {
     Footer,
     Siderbar,
     SiderbarM,
+    Pagination
   },
   data() {
     return {
       isLoading: false,
+      brand: null,
       product_list: {
         data: [],
       },
+      pagination: {},
     };
   },
   watch: {
@@ -139,12 +130,14 @@ export default {
     vm.getProduct();
   },
   methods: {
-    getProduct() {
+    getProduct(currentPage = 1) {
       const vm = this;
       vm.isLoading = true;
       if (vm.$route.query.brand) {
-        getProductbyBrand_pages(vm.$route.query.brand).then(function (res) {
+        getProductbyBrand_pages(vm.$route.query.brand, currentPage).then(function (res) {
           console.log(res);
+          vm.pagination = res.data.data
+          vm.brand = res.data.brand
           vm.product_list = res.data.data;
           vm.isLoading = false;
         });

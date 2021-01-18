@@ -1,7 +1,7 @@
 <template>
   <div id="navbar">
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="javascript:;">後台管理</a>
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#/">後台管理</a>
       <input
         class="form-control form-control-dark w-100"
         type="text"
@@ -21,9 +21,9 @@
 export default {
   methods: {
     signout() {
-      const vm = this;
+      // const vm = this;
       localStorage.clear();
-      vm.$router.push("/");
+     location.reload();
     },
   },
 };

@@ -62,6 +62,7 @@
     <Pagination :compo-pages="pagination" @turn="getBlog"></Pagination>
     <!-- Bootstrap edit Modal -->
     <div
+    v-if="!isLoading"
       class="modal fade"
       id="blogModal"
       tabindex="-1"
@@ -130,6 +131,14 @@
                 <div class="form-group">
                   <label for="editor">{{type_chi}}描述</label>
                   <textarea
+                    v-if="type=='Home'"
+                    type="text"
+                    class="form-control"
+                    v-model="tempBlog.description"
+                    :placeholder="`請輸入${type_chi}描述`"
+                  ></textarea>
+                  <textarea
+                    v-else
                     id="editor"
                     type="text"
                     class="form-control"
@@ -274,7 +283,7 @@ export default {
     openModal(isNew, item) {
       let vm = this;
 
-      if (document.querySelector("#editor").style.display != "none") {
+      if (vm.type!="Home" && document.querySelector("#editor").style.display != "none") {
         const ImgurUploader = ImgurUploaderInit({
           clientID: "f10b8924e90bee5",
         });
@@ -311,7 +320,7 @@ export default {
       console.log(vm.isNew);
       if (!vm.isNew) {
         // 如果不是新文章,則切換成更新文章
-        vm.tempBlog.description = vm.editor.getData();
+        if(vm.type!="Home")vm.tempBlog.description = vm.editor.getData();
         vm.tempBlog.type = vm.type;
         updateBlog(vm.tempBlog).then((response) => {
           window.$("#blogModal").modal("hide");
@@ -325,7 +334,7 @@ export default {
       } else {
         console.log("here 新文章");
         // 新文章
-        vm.tempBlog.description = vm.editor.getData();
+        if(vm.type!="Home")vm.tempBlog.description = vm.editor.getData();
         vm.tempBlog.type = vm.type;
         newBlog(vm.tempBlog).then((response) => {
           window.$("#blogModal").modal("hide");

@@ -4,8 +4,9 @@
     <table class="table mt-4">
       <thead>
         <tr>
+          <th class="text-nowrap">訂單編號</th>
           <th>購買時間</th>
-          <th>Email</th>
+          <th class="text-nowrap">聯絡方式</th>
           <th>購買款項</th>
           <th>應付金額</th>
           <th>ago</th>
@@ -19,8 +20,26 @@
           :key="key"
           :class="{ 'text-secondary': !item.status === 'true' }"
         >
+          <td class="text-nowrap">{{ item.ooid }}</td>
+
           <td>{{ item.cr_at }}</td>
-          <td><span v-text="item.email" v-if="item.email"></span></td>
+         
+                   <td>
+            <ul class="list-unstyled">
+              <li class="text-nowrap">
+                收件人：<span v-text="item.name" v-if="item.name"></span>
+              </li>
+              <li class="text-nowrap">
+                電話：<span v-text="item.phone" v-if="item.phone"></span>
+              </li>
+              <li class="text-nowrap">
+                地址：<span v-text="item.address" v-if="item.address"></span>
+              </li>
+              <li class="text-nowrap">
+                Email：<span v-text="item.email" v-if="item.email"></span>
+              </li>
+            </ul>
+          </td>
           <td>
             <ul class="list-unstyled">
               <li v-for="(product, i) in item.products" :key="i">
@@ -90,6 +109,7 @@
           </div>
           <div class="modal-footer">
             <button
+            v-if="isChecking"
               type="button"
               class="btn btn-primary"
               @click.prevent="updateOrder()"
@@ -117,6 +137,7 @@ export default {
       ooid: null,
       showdg: false,
       focusOoid:null,
+      isChecking:false,
     };
   },
   components: {
@@ -144,6 +165,7 @@ export default {
       console.log(item);
       vm.$route.params.dgid = item.ppid;
       vm.focusOoid=item.ooid;
+      vm.isChecking=item.status===2;
     },
 
 

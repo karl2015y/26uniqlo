@@ -190,7 +190,9 @@ a:active {
     outline: none;
 }
 a {
-    color: #333;
+    color: #ababab;
+    /* -webkit-text-stroke: 1px white; */
+
 }
 a:hover,
 a:focus,

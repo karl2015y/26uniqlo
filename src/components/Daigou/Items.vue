@@ -194,7 +194,7 @@
               </div>
             </div>
           </div>
-          <div class="modal-footer">
+          <div v-if="focusDaigouitems.status<3" class="modal-footer">
             <button
               type="button"
               class="btn btn-outline-secondary"
