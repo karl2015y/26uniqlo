@@ -14,7 +14,7 @@
         建立代購品項
       </button>
     </div>
-    <table class="table mt-4 mb-5 table-responsive-md" style="font-size: 1rem">
+    <table class="table mt-4 mb-5 table-responsive" style="font-size: 1rem">
       <thead>
         <tr>
           <th class="text-nowrap">代購連結</th>
@@ -194,7 +194,7 @@
               </div>
             </div>
           </div>
-          <div v-if="focusDaigouitems.status<3" class="modal-footer">
+          <div class="modal-footer">
             <button
               type="button"
               class="btn btn-outline-secondary"
@@ -397,6 +397,7 @@ export default {
           count: 1,
           price: 0,
           note: "",
+          status: 0,
         };
         this.isNew = true;
       } else {
@@ -407,6 +408,7 @@ export default {
         ).id;
         this.isNew = false;
       }
+      
       window.$("#daigouitemModal").modal("show");
     },
     //打開刪除視窗

@@ -44,7 +44,7 @@
             <ul class="list-unstyled">
               <li v-for="(product, i) in item.products" :key="i">
                 <template v-if="product.ppid.indexOf('DG') > -1">
-                  <span @click="openModal(product)" class="btn-link">
+                  <span @click="openModal(product,item)" class="btn-link">
                     查看代購單-{{ product.ppid }}
                   </span>
                     <span class="small">費用： {{ product.price }}</span>
@@ -155,7 +155,7 @@ export default {
       });
     },
     // 打開編輯視窗
-    openModal(item) {
+    openModal(item,orderData) {
       const vm = this;
       vm.showdg = false;
       setTimeout(() => {
@@ -165,7 +165,8 @@ export default {
       console.log(item);
       vm.$route.params.dgid = item.ppid;
       vm.focusOoid=item.ooid;
-      vm.isChecking=item.status===2;
+      console.log("item.status",item);
+      vm.isChecking=orderData.status===2;
     },
 
 
