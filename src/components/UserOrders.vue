@@ -195,7 +195,7 @@ export default {
       const vm = this;
       vm.isLoading = true;
       getMyOrders(currentPage).then((response) => {
-        vm.orders = response.data.data.data;
+        vm.orders = Object.values(response.data.data.data);
         vm.isLoading = false;
         vm.pagination = response.data.data;
       });

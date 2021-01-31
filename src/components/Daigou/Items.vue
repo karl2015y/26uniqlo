@@ -49,13 +49,14 @@
 
           <td v-if="daigouorder.status!=1 || $route.path.indexOf('/admin/orders')>-1" class="text-center text-nowrap">
             <button
+              v-if="item.dgtype.indexOf('韓國運費')==-1"
               class="btn btn-sm btn-outline-info mr-1"
               @click="openModal(false, item)"
             >
               查看
             </button>
             <button
-            v-if="$route.path.indexOf('/admin/orders')==-1"
+            v-if="item.dgtype.indexOf('韓國運費')==-1 || $route.path.indexOf('/admin/orders')>-1"
               class="btn btn-sm btn-outline-danger"
               @click="openDelModal(item)"
             >
@@ -89,6 +90,7 @@
       role="dialog"
       aria-labelledby="exampleModalLabel"
       aria-hidden="true"
+      data-backdrop="false"
     >
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
@@ -163,7 +165,9 @@
 
                 <div class="form-group">
                   <label for="note">備註</label>
+                  <p v-if="$route.path.indexOf('/admin/orders')>=-1" v-text="focusDaigouitems.note" style="white-space: pre-line;"/>
                   <textarea
+                  v-else
                     rows="6"
                     type="text"
                     class="form-control"
@@ -195,13 +199,24 @@
             </div>
           </div>
           <div class="modal-footer">
+
+          <button
+          v-if="$route.path.indexOf('/admin/orders')>=-1"
+              type="button"
+              class="btn btn-outline-secondary"
+              @click.prevent="adminCloseModal()"
+            >
+              取消
+            </button>
             <button
+            v-else
               type="button"
               class="btn btn-outline-secondary"
               data-dismiss="modal"
             >
               取消
             </button>
+            
             <button
               type="button"
               class="btn btn-primary"
@@ -348,6 +363,9 @@ export default {
     this.getDaigouparams();
   },
   methods: {
+    adminCloseModal(){
+      window.$('#daigouitemModal').modal('hide');
+    },
     getDaigouorder() {
       let vm = this;
       vm.isLoading = true;
