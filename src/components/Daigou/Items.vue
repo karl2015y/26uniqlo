@@ -167,7 +167,7 @@
                   <label for="note">備註</label>
                   <p v-if="$route.path.indexOf('/admin/orders')>=-1" v-text="focusDaigouitems.note" style="white-space: pre-line;"/>
                   <textarea
-                  v-else
+                  v-if="$route.path.indexOf('/admin/orders')==-1"
                     rows="6"
                     type="text"
                     class="form-control"
